@@ -3,26 +3,38 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="form-floating my-3">
+    <%= f.email_field :email,
+                      class: "form-control",
+                      autocomplete: "email",
+                      id: "email",
+                      placeholder: "example@email.com" %>
+    <%= f.label :email, for: "email" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="form-floating my-3">
+    <%= f.password_field :password,
+                         class: "form-control",
+                         autocomplete: "new-password",
+                         id: "password",
+                         placeholder: "password" %>
+    <%= f.label :password, for: "password" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="form-floating my-3">
+    <%= f.password_field :password_confirmation,
+                         class: "form-control",
+                         autocomplete: "new-password",
+                         id: "password_confirmation",
+                         placeholder: "password" %>
+    <%= f.label :password_confirmation, for: "password_confirmation" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions my-2">
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
 
