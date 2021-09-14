@@ -5,6 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
+gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+gem 'credit_card_validations', '~> 4.1'
 gem 'devise', '~> 4.8'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'

@@ -2,12 +2,13 @@
 
 FactoryBot.define do
   factory :contact do
-    name { Faker::Name.name }
-    birth_date { FFaker::Time.datetime }
-    phone_number { FFaker::PhoneNumberAU.mobile_phone_number.delete(' ') }
+    user { nil }
+    name { FFaker::Name.name }
+    birth_date { FFaker::Time.date }
+    phone_numbers = ['(+12) 345 678 90 12', '(+12) 345-678-90-12']
+    phone_number { phone_numbers.sample }
     address { FFaker::Address.street_address }
-    credit_card { FFaker::Bank.card_type }
-    franchise { FFaker::Bank.card_number }
+    credit_card { CreditCardValidations::Factory.random }
     email { FFaker::Internet.safe_email }
   end
 end
