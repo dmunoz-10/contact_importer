@@ -1,0 +1,58 @@
+<h1>Import Contacts</h1>
+
+<%= form_with url: contacts_path, local: true, multipart: true do |f| %>
+  <div class="my-5">
+    <label for="file" class="form-label">Import the csv file</label>
+    <input class="form-control" type="file" id="file" name="contacts_file" required>
+  </div>
+
+  <h4>Please map the columns name with the information</h4>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="name" name="contacts[name]" required>
+        <label for="name">Name</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="birth_date" placeholder="birth_date" name="contacts[birth_date]" required>
+        <label for="birth_date">Birth date</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="phone_number" placeholder="phone_number" name="contacts[phone_number]" required>
+        <label for="phone_number">Phone number</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="address" placeholder="address" name="contacts[address]" required>
+        <label for="address">Address</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="credit_card" placeholder="credit_card" name="contacts[credit_card]" required>
+        <label for="credit_card">Credit Card</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="email" placeholder="email" name="contacts[email]" required>
+        <label for="email">Email</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-cente">
+    <%= f.submit "Import", class: "btn btn-primary" %>
+  </div>
+<% end %>
