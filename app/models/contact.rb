@@ -5,6 +5,7 @@ class Contact < ApplicationRecord
   VALID_BIRTH_DATE_FORMAT = %w[%Y%m%d %F].freeze
 
   belongs_to :user
+  belongs_to :log_file
 
   validates_presence_of :name, :birth_date, :phone_number, :address, :credit_card,
                         :last_four_digits, :franchise, :email
@@ -39,10 +40,10 @@ class Contact < ApplicationRecord
   end
 
   def save_credit_card_details
-    return unless self.credit_card
+    return unless credit_card
 
-    self.last_four_digits = self.credit_card[-4..]
-    self.franchise = CreditCardValidations::Detector.new(self.credit_card).brand_name
-    self.credit_card = BCrypt::Password.create(self.credit_card)
+    self.last_four_digits = credit_card[-4..]
+    self.franchise = CreditCardValidations::Detector.new(credit_card).brand_name
+    self.credit_card = BCrypt::Password.create(credit_card)
   end
 end
