@@ -19,7 +19,7 @@ class ProcessContactFileService
                                         @log_file))
       contact.save!
     rescue ActiveRecord::RecordInvalid => e
-      UploadError.create(log_file: @log_file, details: e, upload_row: index)
+      UploadError.create(log_file: @log_file, details: e.message[19..], upload_row: index)
       errors_counter += 1
     end
 
@@ -28,8 +28,12 @@ class ProcessContactFileService
 
   private
 
+  def rows
+    @rows ||= CSV.read(@file_url, headers: true).count
+  end
+
   def empty_csv?
-    if CSV.read(@file_url, headers: true).count.zero?
+    if rows.zero?
       @log_file.terminated!
       return true
     end

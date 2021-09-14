@@ -3,7 +3,9 @@
   Status: <%= @log_file.status %>
 </p>
 
-<%= link_to 'Contacts that were not imported', '#', class: 'btn' if @contacts_error %>
+<%= link_to 'Contacts that were not imported',
+            log_file_upload_errors_path(@log_file),
+            class: 'btn btn-danger my-5' if @contacts_error %>
 
 <h3>Contacts Imported</h3>
 
