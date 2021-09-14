@@ -1,0 +1,45 @@
+<h3>File Name: <%= @log_file.csv.filename.to_s %></h3>
+<p>
+  Status: <%= @log_file.status %>
+</p>
+
+<%= link_to 'Contacts that were not imported', '#', class: 'btn' if @contacts_error %>
+
+<h3>Contacts Imported</h3>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover ">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Credit Card</th>
+        <th>Franchise</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @contacts.size > 0 %>
+        <% @contacts.each do |contact| %>
+          <tr>
+            <td><%= contact.name %></td>
+            <td><%= contact.birth_date_formatted %></td>
+            <td><%= contact.phone_number %></td>
+            <td><%= contact.address %></td>
+            <td><%= contact.last_four_digits %></td>
+            <td><%= contact.franchise %></td>
+            <td><%= contact.email %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="7" class="text-muted">Empty</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= pagy_bootstrap_nav(@pagy).html_safe %>
