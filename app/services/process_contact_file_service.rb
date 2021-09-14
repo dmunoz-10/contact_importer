@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class ProcessContactFileService
@@ -8,11 +10,7 @@ class ProcessContactFileService
 
   def call
     @log_file.processing!
-    rows = CSV.read(@file_url, headers: true).count
-    if rows.zero?
-      @log_file.terminated!
-      return
-    end
+    return if empty_csv?
 
     errors_counter = 0
     CSV.foreach(@file_url, headers: true).with_index do |row, index|
@@ -29,6 +27,15 @@ class ProcessContactFileService
   end
 
   private
+
+  def empty_csv?
+    if CSV.read(@file_url, headers: true).count.zero?
+      @log_file.terminated!
+      return true
+    end
+
+    false
+  end
 
   def data_parsed(data_mapped, data, log_file)
     {

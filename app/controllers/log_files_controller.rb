@@ -6,7 +6,7 @@ class LogFilesController < ApplicationController
   def show
     @file_url = ActiveStorage::Blob.service.path_for(@log_file.csv.key)
     @pagy, @contacts = pagy(@log_file.contacts.order(:created_at), items: 20)
-    @contacts_error = @log_file.upload_errors.count > 0
+    @contacts_error = @log_file.upload_errors.count.positive?
   end
 
   private

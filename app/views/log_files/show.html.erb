@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <% if @contacts.size > 0 %>
+      <% if @contacts.size.positive? %>
         <% @contacts.each do |contact| %>
           <tr>
             <td><%= contact.name %></td>

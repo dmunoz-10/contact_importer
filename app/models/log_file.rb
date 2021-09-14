@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LogFile < ApplicationRecord
   enum status: %i[on_hold processing failed terminated]
 
