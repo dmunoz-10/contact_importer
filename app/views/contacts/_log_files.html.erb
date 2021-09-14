@@ -1,0 +1,10 @@
+<% color = log_file.terminated? ? 'success' : log_file.failed? ? 'danger' : log_file.processing? ? 'primary' : 'light' %>
+
+
+<%= link_to log_file_path(log_file), class: 'text-decoration-none text-black' do %>
+  <div class="card border-<%= color %> my-2">
+    <div class="card-body">
+      <%= "#{log_file.id}. #{log_file.csv.filename.to_s} - #{log_file.status}" %>
+    </div>
+  </div>
+<% end %>

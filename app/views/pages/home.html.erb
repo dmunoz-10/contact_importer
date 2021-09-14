@@ -1,2 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if user_signed_in? %>
+  <h1 class="mb-5">Files imported</h1>
+  <% if @files_imported.size > 0 %>
+    <%= render partial: 'contacts/log_files', collection: @files_imported, as: :log_file %>
+
+    <%= pagy_bootstrap_nav(@pagy).html_safe %>
+  <% else %>
+    <h4 class="text-muted">Empty</h4>
+  <% end %>
+<% else %>
+  <h1>Welcome</h1>
+<% end %>
