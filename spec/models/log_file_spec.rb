@@ -3,5 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe LogFile, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'User validation' do
+    it 'must exist' do
+      contact = build(:log_file)
+      contact.save
+      expect(contact.errors[:user]).to include('must exist')
+    end
+  end
 end

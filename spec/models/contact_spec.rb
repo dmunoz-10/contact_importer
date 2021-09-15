@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 require 'rails_helper'
 
 RSpec.describe Contact, type: :model do
@@ -11,6 +10,14 @@ RSpec.describe Contact, type: :model do
       contact = build(:contact)
       contact.save
       expect(contact.errors[:user]).to include('must exist')
+    end
+  end
+
+  describe 'Log File validation' do
+    it 'must exist' do
+      contact = build(:contact)
+      contact.save
+      expect(contact.errors[:log_file]).to include('must exist')
     end
   end
 

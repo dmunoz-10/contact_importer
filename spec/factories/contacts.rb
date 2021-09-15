@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :contact do
     user { nil }
+    log_file { nil }
     name { FFaker::Name.name }
     birth_date { FFaker::Time.date }
     phone_numbers = ['(+12) 345 678 90 12', '(+12) 345-678-90-12']

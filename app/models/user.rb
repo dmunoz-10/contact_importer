@@ -7,4 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :contacts
   has_many :log_files
+
+  validates :email, presence: true, uniqueness: true, format: { with: Devise.email_regexp }
+  validates :password, length: { minimum: 6 }, presence: true, on: :create
 end
