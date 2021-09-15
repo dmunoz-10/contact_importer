@@ -3,5 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe ImportContactsJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:user) { create(:user) }
+  let!(:log_file) { create(:log_file, user: user) }
+
+  describe '#perform_later' do
+    it 'proccess the contacts file' do
+      ActiveJob::Base.queue_adapter = :test
+      expect {
+        ImportContactsJob.perform_later(log_file.id)
+      }.to have_enqueued_job.with(log_file.id)
+    end
+  end
 end
