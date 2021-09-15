@@ -7,4 +7,6 @@ class LogFile < ApplicationRecord
   has_many :contacts
   has_many :upload_errors
   has_one_attached :csv, dependent: :destroy
+
+  validates_presence_of :data_mapped
 end
