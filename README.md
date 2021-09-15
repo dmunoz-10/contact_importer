@@ -1,5 +1,5 @@
 # Contact Importer
-Contact importer is an app to import contacts... Didn't you see that coming, eh? ;)
+Contact importer is an app to import contacts... Didn't you see that coming, eh? ;) <br>
 Heroku deploy: https://contact-importer-dmunoz.herokuapp.com/
 
 ## How to run the app
@@ -15,7 +15,7 @@ Heroku deploy: https://contact-importer-dmunoz.herokuapp.com/
  9. (Optional) Instead of do the step 7 and 8, you can install foreman (`gem install foreman`) and run `foreman start -f Procfile.dev` and it will handle the execution for you.
 
 ## Credentials
-Email: test@test.com
+Email: test@test.com <br>
 Password: testing
 
 ## CSV Files
