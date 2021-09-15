@@ -110,10 +110,22 @@ RSpec.describe Contact, type: :model do
     end
 
     it 'must be unique' do
-      contact = create(:contact, user: user)
+      user = create(:user)
+      log_file = create(:log_file, :data_example, user: user)
+      contact = create(:contact, user: user, log_file: log_file)
       contact2 = build(:contact, user: user, email: contact.email)
       contact2.save
       expect(contact2.errors[:email]).to include('has already been taken')
+    end
+  end
+
+  describe '#birth_date_formatted' do
+    it 'must return the date with the specified format' do
+      user = create(:user)
+      log_file = create(:log_file, :data_example, user: user)
+      contact = create(:contact, user: user, log_file: log_file)
+      expected_formatted_date = Date.parse(contact.birth_date).strftime('%Y %B %d')
+      expect(contact.birth_date_formatted).to eq(expected_formatted_date)
     end
   end
 end

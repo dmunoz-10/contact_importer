@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'UploadErrors', type: :request do
   let!(:user) { create(:user) }
-  let!(:log_file) { create(:log_file, user: user) }
+  let!(:log_file) { create(:log_file, :data_example, user: user) }
 
   before do
     sign_in user
