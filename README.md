@@ -2,6 +2,10 @@
 Contact importer is an app to import contacts... Didn't you see that coming, eh? ;) <br>
 Heroku deploy: https://contact-importer-dmunoz.herokuapp.com/
 
+## Credentials
+Email: test@test.com <br>
+Password: testing
+
 ## How to run the app
 
  1. Install the specified ruby version (2.7.3).
@@ -13,10 +17,6 @@ Heroku deploy: https://contact-importer-dmunoz.herokuapp.com/
  7. Run `bundle exec sidekiq` to execute sidekiq.
  8. Run `bundle exec rails server` to finally execute the app.
  9. (Optional) Instead of do the step 7 and 8, you can install foreman (`gem install foreman`) and run `foreman start -f Procfile.dev` and it will handle the execution for you.
-
-## Credentials
-Email: test@test.com <br>
-Password: testing
 
 ## CSV Files
 There are 4 csv files on `spec/fixtures/files/csv/` for each condition.
