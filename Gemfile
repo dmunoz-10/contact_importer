@@ -16,6 +16,7 @@ gem 'rails', '~> 6.0.4', '>= 6.0.4.1'
 gem 'redis', '~> 4.0'
 gem 'rubocop', '~> 1.21'
 gem 'sass-rails', '>= 6'
+gem 'sidekiq', '~> 6.2', '>= 6.2.2'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 

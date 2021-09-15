@@ -3,9 +3,9 @@
 require 'csv'
 
 class ProcessContactFileService
-  def initialize(log_file)
-    @log_file = log_file
-    @file_url = ActiveStorage::Blob.service.path_for(log_file.csv.key)
+  def initialize(log_file_id)
+    @log_file = LogFile.find(log_file_id)
+    @file_url = ActiveStorage::Blob.service.path_for(@log_file.csv.key)
   end
 
   def call

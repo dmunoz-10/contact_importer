@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
     log_file = current_user.log_files
                            .create(csv: params[:contacts_file],
                                    data_mapped: params[:contacts].to_json)
-    ImportContactsJob.perform_now(log_file)
+    ImportContactsJob.perform_later(log_file.id)
     redirect_to(root_path, notice: 'The contacts are being imported!')
   end
 end
