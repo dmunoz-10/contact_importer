@@ -10,41 +10,24 @@ class ProcessContactFileService
 
   def call
     @log_file.processing!
-    return if empty_csv?
-
-    errors_counter = 0
-    CSV.foreach(@file_url, headers: true).with_index do |row, index|
-      contact = Contact.new(data_parsed(JSON.parse(@log_file.data_mapped),
-                                        row.to_hash,
-                                        @log_file))
-      contact.save!
-    rescue ActiveRecord::RecordInvalid => e
-      UploadError.create(log_file: @log_file, details: e.message[19..], upload_row: index)
-      errors_counter += 1
+    CSV.foreach(@file_url, headers: true).with_index(1) do |row, index|
+      @log_file.contacts.create!(data_parsed(@log_file.data_mapped, row))
+    rescue ActiveRecord::RecordInvalid => errors
+      @log_file.upload_errors.create(details: errors, upload_row: index)
     end
 
-    errors_counter == rows ? @log_file.failed! : @log_file.terminated!
+    if !@log_file.contacts.exists? && @log_file.upload_errors.exists?
+      @log_file.failed!
+    else
+      @log_file.terminated!
+    end
   end
 
   private
 
-  def rows
-    @rows ||= CSV.read(@file_url, headers: true).count
-  end
-
-  def empty_csv?
-    if rows.zero?
-      @log_file.terminated!
-      return true
-    end
-
-    false
-  end
-
-  def data_parsed(data_mapped, data, log_file)
+  def data_parsed(data_mapped, data)
     {
-      user_id: log_file.user_id,
-      log_file_id: log_file.id,
+      user_id: @log_file.user_id,
       name: data[data_mapped['name']],
       birth_date: data[data_mapped['birth_date']],
       phone_number: data[data_mapped['phone_number']],

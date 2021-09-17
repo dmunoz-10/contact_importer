@@ -6,7 +6,6 @@ class UploadErrorsController < ApplicationController
   def index
     @file_path = ActiveStorage::Blob.service.path_for(@log_file.csv.key)
     @pagy, @upload_errors = pagy(@log_file.upload_errors.order(:created_at), items: 10)
-    @data_mapped = JSON.parse(@log_file.data_mapped)
   end
 
   private

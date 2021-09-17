@@ -15,8 +15,8 @@ RSpec.describe ProcessContactFileService do
       it 'must create the contacts without errors' do
         ProcessContactFileService.new(log_file.id).call
 
-        expect(log_file.contacts.count.positive?).to be(true)
-        expect(log_file.upload_errors.count.zero?).to be(true)
+        expect(log_file.contacts.count).to be(5)
+        expect(log_file.upload_errors.exists?).to be(false)
       end
     end
 
@@ -24,8 +24,8 @@ RSpec.describe ProcessContactFileService do
       it 'must create the contacts with some errors' do
         ProcessContactFileService.new(log_file2.id).call
 
-        expect(log_file2.contacts.count.positive?).to be(true)
-        expect(log_file2.upload_errors.count.positive?).to be(true)
+        expect(log_file2.contacts.count).to be(6)
+        expect(log_file2.upload_errors.count).to be(1)
       end
     end
 
@@ -33,8 +33,8 @@ RSpec.describe ProcessContactFileService do
       it 'must not create the contacts' do
         ProcessContactFileService.new(log_file3.id).call
 
-        expect(log_file3.contacts.count.zero?).to be(true)
-        expect(log_file3.upload_errors.count.positive?).to be(true)
+        expect(log_file3.contacts.exists?).to be(false)
+        expect(log_file3.upload_errors.count).to be(7)
       end
     end
 
@@ -42,8 +42,8 @@ RSpec.describe ProcessContactFileService do
       it 'must return without any contact created and no errors' do
         ProcessContactFileService.new(log_file4.id).call
 
-        expect(log_file3.contacts.count.zero?).to be(true)
-        expect(log_file3.upload_errors.count.zero?).to be(true)
+        expect(log_file3.contacts.exists?).to be(false)
+        expect(log_file3.upload_errors.exists?).to be(false)
       end
     end
   end

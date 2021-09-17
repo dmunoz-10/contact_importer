@@ -5,12 +5,12 @@ class LogFilesController < ApplicationController
 
   def show
     @pagy, @contacts = pagy(@log_file.contacts.order(:created_at), items: 20)
-    @contacts_error = @log_file.upload_errors.count.positive?
+    @contacts_error = @log_file.upload_errors.exists?
   end
 
   private
 
   def set_log_file
-    @log_file = LogFile.find(params[:id])
+    @log_file = current_user.log_files.find(params[:id])
   end
 end

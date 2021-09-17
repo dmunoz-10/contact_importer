@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def find_row_csv(csv, index)
-    csv.find.with_index { |_p, i| i == index }&.to_hash
+    csv.find.with_index(1) { |_p, i| i == index }&.to_hash
   end
 end

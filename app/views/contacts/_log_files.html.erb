@@ -1,8 +1,5 @@
-<% color = log_file.terminated? ? 'success' : log_file.failed? ? 'danger' : log_file.processing? ? 'primary' : 'dark' %>
-
-
 <%= link_to log_file_path(log_file), class: 'text-decoration-none text-black' do %>
-  <div class="card border-<%= color %> my-2">
+  <div class="card border-<%= color_status(log_file.status.to_sym) %> my-2">
     <div class="card-body d-flex align-items-center justify-content-center">
       <span class="me-2">
         <%= "#{log_file.id}. #{log_file.csv.filename.to_s} - #{log_file.status}" %>
