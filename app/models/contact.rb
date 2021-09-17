@@ -30,9 +30,11 @@ class Contact < ApplicationRecord
   end
 
   def credit_card_validation
-    if credit_card.present? && !CreditCardValidations::Luhn.valid?(credit_card)
-      errors.add(:credit_card, 'Must be a valid credit card number')
-    end
+    errors.add(:credit_card, 'Must be a valid credit card number') unless valid_credit_card?
+  end
+
+  def valid_credit_card?
+    credit_card.present? && CreditCardValidations::Luhn.valid?(credit_card)
   end
 
   def valid_date?
