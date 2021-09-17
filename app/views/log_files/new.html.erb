@@ -1,0 +1,78 @@
+<h1>Import Contacts</h1>
+
+<%= form_with model: @log_file, local: true, multipart: true do |f| %>
+  <div class="my-5">
+    <%= f.label :csv, 'Import the CSV file', class: 'form-label' %>
+    <%= f.file_field :csv, class: 'form-control', id: 'csv', required: true %>
+  </div>
+
+  <h4>Please map the columns name with the information</h4>
+
+  <%= f.fields_for :data_mapped do |data_mapped_fields| %>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :name,
+                                            class: 'form-control',
+                                            placeholder: 'Name',
+                                            required: true %>
+          <%= data_mapped_fields.label :name %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :birth_date,
+                                            class: 'form-control',
+                                            placeholder: 'Birth Date',
+                                            required: true %>
+          <%= data_mapped_fields.label :birth_date %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :phone_number,
+                                            class: 'form-control',
+                                            placeholder: 'Phone number',
+                                            required: true %>
+          <%= data_mapped_fields.label :phone_number %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :address,
+                                            class: 'form-control',
+                                            placeholder: 'Address',
+                                            required: true %>
+          <%= data_mapped_fields.label :address %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :credit_card,
+                                            class: 'form-control',
+                                            placeholder: 'Credit Card',
+                                            required: true %>
+          <%= data_mapped_fields.label :credit_card %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <%= data_mapped_fields.text_field :email,
+                                            class: 'form-control',
+                                            placeholder: 'Email',
+                                            required: true %>
+          <%= data_mapped_fields.label :email %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-cente">
+    <%= f.submit "Import", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <% if @contacts.size.positive? %>
+      <% if @contacts.exists? %>
         <% @contacts.each do |contact| %>
           <tr>
             <td><%= contact.name %></td>

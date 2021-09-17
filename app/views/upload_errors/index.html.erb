@@ -15,26 +15,26 @@
       </tr>
     </thead>
     <tbody>
-      <% if @upload_errors.size.positive? %>
+      <% if @upload_errors.exists? %>
         <% csv = csv_file(@file_path) %>
 
         <% @upload_errors.each do |upload_error| %>
           <% row = find_row_csv(csv, upload_error.upload_row) %>
 
           <tr>
-            <td><%= upload_error.upload_row + 1 %></td>
-            <td><%= row[@data_mapped['name']] %></td>
-            <td><%= row[@data_mapped['birth_date']] %></td>
-            <td><%= row[@data_mapped['phone_number']] %></td>
-            <td><%= row[@data_mapped['address']] %></td>
-            <td><%= row[@data_mapped['credit_card']] %></td>
-            <td><%= row[@data_mapped['email']] %></td>
+            <td><%= upload_error.upload_row %></td>
+            <td><%= row[@log_file.data_mapped['name']] %></td>
+            <td><%= row[@log_file.data_mapped['birth_date']] %></td>
+            <td><%= row[@log_file.data_mapped['phone_number']] %></td>
+            <td><%= row[@log_file.data_mapped['address']] %></td>
+            <td><%= row[@log_file.data_mapped['credit_card']] %></td>
+            <td><%= row[@log_file.data_mapped['email']] %></td>
             <td><%= upload_error.details %></td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan="7" class="text-muted">Empty</td>
+          <td colspan="8" class="text-muted">Empty</td>
         </tr>
       <% end %>
     </tbody>
