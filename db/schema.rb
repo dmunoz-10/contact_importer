@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2021_09_14_185824) do
 
   create_table "log_files", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "data_mapped"
-    t.integer "status", default: 0
+    t.jsonb "data_mapped", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_log_files_on_user_id"

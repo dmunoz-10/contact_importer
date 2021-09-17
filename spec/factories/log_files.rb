@@ -11,7 +11,7 @@ FactoryBot.define do
         address: 'Address',
         credit_card: 'Credit Card',
         email: 'Email'
-      }.to_json
+      }
     end
     status { LogFile.statuses.values.sample }
 
