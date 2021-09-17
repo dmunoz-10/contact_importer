@@ -78,21 +78,11 @@ RSpec.describe Contact, type: :model do
       contact.save
       expect(contact.errors[:credit_card]).to include("can't be blank")
     end
-  end
 
-  describe 'Last four digits validation' do
-    it 'must exist' do
-      contact = build(:contact, user: user, credit_card: nil)
+    it 'must be a valid credit card number' do
+      contact = build(:contact, user: user, credit_card: '1234567890123456')
       contact.save
-      expect(contact.errors[:last_four_digits]).to include("can't be blank")
-    end
-  end
-
-  describe 'Franchise validation' do
-    it 'must exist' do
-      contact = build(:contact, user: user, credit_card: nil)
-      contact.save
-      expect(contact.errors[:franchise]).to include("can't be blank")
+      expect(contact.errors[:credit_card]).to include('Must be a valid credit card number')
     end
   end
 

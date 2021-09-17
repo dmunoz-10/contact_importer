@@ -7,8 +7,7 @@ class Contact < ApplicationRecord
   belongs_to :user
   belongs_to :log_file
 
-  validates_presence_of :name, :birth_date, :phone_number, :address, :credit_card,
-                        :last_four_digits, :franchise, :email
+  validates_presence_of :name, :birth_date, :phone_number, :address, :credit_card, :email
   validates :name,
             format: { with: /\A[a-zA-Z\s\-]+\z/,
                       message: 'Special characters are not allowed, except for the minus (-)' }
@@ -16,8 +15,9 @@ class Contact < ApplicationRecord
                                      message: 'The phone number format is invalid' }
   validates :email, uniqueness: { scope: :user_id }, format: { with: Devise.email_regexp }
   validate :birth_date_validation
+  validate :credit_card_validation
 
-  before_validation :save_credit_card_details
+  after_validation :save_credit_card_details
 
   def birth_date_formatted
     Date.parse(birth_date).strftime('%Y %B %d')
@@ -27,6 +27,12 @@ class Contact < ApplicationRecord
 
   def birth_date_validation
     errors.add(:birth_date, 'Invalid format') unless valid_date?
+  end
+
+  def credit_card_validation
+    if credit_card.present? && !CreditCardValidations::Luhn.valid?(credit_card)
+      errors.add(:credit_card, 'Must be a valid credit card number')
+    end
   end
 
   def valid_date?
