@@ -15,7 +15,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe 'find_row_csv method' do
     context 'the index exist' do
       it 'must return a hash' do
-        row = find_row_csv(csv_reader, 0)
+        row = find_row_csv(csv_reader, 1)
         expect(row.class).to be(Hash)
       end
     end
